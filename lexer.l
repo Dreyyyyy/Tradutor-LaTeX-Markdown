@@ -13,8 +13,8 @@ delim (\{|\})
 %%
 "\\documentclass"					{ return CLASSE; }
 "\\usepackage"						{ return PACOTE; }
-"\\title"									{ return TITULO; }
-"\\author"								{ return AUTOR; }
-{delim}										{ return DELIM; }
-({pt1}{pt2})				      { yylval.palavra = strdup(yytext); return TEXTO; }
+"\\title"						{ return TITULO; }
+"\\author"						{ return AUTOR; }
+{delim}							{ return DELIM; }
+({pt1}{pt2})				                { yylval.palavra = strdup(yytext); return TEXTO; }
 %%
