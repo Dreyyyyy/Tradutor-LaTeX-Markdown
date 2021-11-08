@@ -5,7 +5,7 @@
 
 #### How to create Sections and Subsections
 
-Simply use the section and subsection commands, as in this example document! With Overleaf, all the formatting and numbering is handled automatically according to the template you've chosen. If you're using Rich Text mode, you can also create new section and subsections via the buttons in the editor toolbar.
+Simply use the section and **subsection commands** as in this example document! With Overleaf, all the formatting and numbering is handled automatically according to the template you've chosen. If you're using Rich Text mode, you can also create new *section and subsections* via the buttons in the editor toolbar.
 
 #### Good luck!
 

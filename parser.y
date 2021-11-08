@@ -77,24 +77,20 @@ corpolista:
 		;		
 		
 secao:
-		SECAO DELIM secaotex DELIM pulalinha
+		SECAO DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"### "); } texto DELIM pulalinha
 		;
 
 subsecao:
-		SUBSECAO DELIM subsecaotex DELIM pulalinha
+		SUBSECAO DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"#### "); } texto DELIM pulalinha
 		;
 		
 corpo:
-		textocorpo |listas
+		texto estilo corpo | texto | listas | estilo
 		;
-		
-textocorpo:
-		| TEXTO textocorpo {
-			if(!arquivoSaida)
-				abrir_arquivo();
-				
-			fprintf(arquivoSaida,"%s", $1);
-		}
+
+estilo:
+		BOLD DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"**"); } texto { fprintf(arquivoSaida,"** "); } DELIM
+		| ITALIC DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"*"); } texto { fprintf(arquivoSaida,"* "); } DELIM
 		;
 
 listas :
@@ -132,55 +128,28 @@ fimdoc:
 		;
 
 titulo:
-		TITULO DELIM titulotex DELIM pulalinha
+		TITULO DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"# "); } texto  DELIM pulalinha
 		;
 
 autor:
-		AUTOR DELIM autortex DELIM pulalinha
+		AUTOR DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"## "); } texto DELIM pulalinha
 		;
 
-titulotex:
-		TEXTO {
-			if(!arquivoSaida)
-				abrir_arquivo();
-				
-			fprintf(arquivoSaida,"# %s", $1);
-		}
-		;
-
-autortex:
-		TEXTO {
-			if(!arquivoSaida)
-				abrir_arquivo();
-				
-			fprintf(arquivoSaida,"## %s", $1);
-		}
-		;
-		
-secaotex:
-		TEXTO {
-			if(!arquivoSaida)
-				abrir_arquivo();
-				
-			fprintf(arquivoSaida,"### %s", $1);
-		}
-		;
-
-subsecaotex:
-		TEXTO {
-			if(!arquivoSaida)
-				abrir_arquivo();
-				
-			fprintf(arquivoSaida,"#### %s", $1);
-		}
-		;
-		
 pulalinha:
 		| EOL pulalinha{
 			if(!arquivoSaida)
 				abrir_arquivo();	
 				
 			fprintf(arquivoSaida,"\n");
+		}
+		;
+		
+texto:
+		TEXTO {
+			if(!arquivoSaida)
+				abrir_arquivo();
+				
+			fprintf(arquivoSaida,"%s", $1);
 		}
 		;
 		
