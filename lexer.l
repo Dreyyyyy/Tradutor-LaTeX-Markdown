@@ -19,5 +19,5 @@ eol [\n]
 {delim}										{ return DELIM; }
 {eol}											{ return EOL; }
 ({pt1}{pt2})				      { yylval.palavra = strdup(yytext); return TEXTO; }
-.													;
+.												;
 %%
