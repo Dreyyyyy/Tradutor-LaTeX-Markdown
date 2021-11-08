@@ -29,11 +29,27 @@ programa:
 		;
 
 documentoLatex:
- 		identificacao
+ 		configuracao identificacao
+		;
+		
+configuracao:
+		classe pacote
+		;
+		
+classe:
+		CLASSE DELIM ignorartexto DELIM ignorarlinha {
+			printf("Classes ignoradas.\n");
+		}
+		;
+
+pacote:
+		PACOTE DELIM ignorartexto DELIM DELIM ignorartexto DELIM ignorarlinha {
+			printf("Pacotes ignorados.\n");
+		}
 		;
 
 identificacao:
-		| titulo autor
+		titulo autor
 		;
 
 titulo:
@@ -65,10 +81,18 @@ autortex:
 pulalinha:
 		| EOL pulalinha{
 			if(!arquivoSaida)
-				abrir_arquivo();
+				abrir_arquivo();	
 				
 			fprintf(arquivoSaida,"\n");
 		}
+		;
+		
+ignorartexto:
+		TEXTO
+		;
+		
+ignorarlinha:
+		| EOL ignorarlinha
 		;
 %%
 
