@@ -194,7 +194,7 @@ ignorarlinha:
 %%
 
 void abrir_arquivo() {
-	arquivoSaida = fopen("/home/andrey/Desktop/TRAB-01/arquivoSaida.txt", "w");
+	arquivoSaida = fopen("/home/andrey/Desktop/TRAB-01/arquivoSaida.md", "w");
 
 	if (!arquivoSaida)
 		printf(">Erro ao criar o arquivo!\n");
