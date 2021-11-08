@@ -15,12 +15,24 @@ void abrir_arquivo();
 }
 
 %token <palavra> TEXTO
+%token <palavra> DOCUMENTO
 %token CLASSE
 %token PACOTE
 %token TITULO
 %token DELIM
 %token AUTOR
 %token EOL
+%token INICIODOC
+%token FIMDOC
+%token SECAO
+%token SUBSECAO
+%token INICIOLN
+%token FIMLN
+%token ITEM
+%token INICIOIT
+%token FIMIT
+%token ITALIC;
+%token BOLD;
 
 %%
 
@@ -29,7 +41,7 @@ programa:
 		;
 
 documentoLatex:
- 		configuracao identificacao
+ 		configuracao identificacao principal
 		;
 		
 configuracao:
@@ -51,6 +63,73 @@ pacote:
 identificacao:
 		titulo autor
 		;
+		
+principal:
+		iniciodoc corpolista fimdoc
+		;
+		
+iniciodoc:
+		INICIODOC ignorarlinha
+		;
+		
+corpolista:
+		| secao corpo corpolista | subsecao corpo corpolista
+		;		
+		
+secao:
+		SECAO DELIM secaotex DELIM pulalinha
+		;
+
+subsecao:
+		SUBSECAO DELIM subsecaotex DELIM pulalinha
+		;
+		
+corpo:
+		textocorpo |listas
+		;
+		
+textocorpo:
+		| TEXTO textocorpo {
+			if(!arquivoSaida)
+				abrir_arquivo();
+				
+			fprintf(arquivoSaida,"%s", $1);
+		}
+		;
+
+listas :
+		| listanum listas | listaitem listas
+		;
+		
+listanum:
+		INICIOLN ignorarlinha itensln FIMLN ignorarlinha
+		;
+		
+listaitem:
+		INICIOIT ignorarlinha itensit FIMIT ignorarlinha
+		;
+		
+itensln:
+		| ITEM TEXTO itensln {
+			if(!arquivoSaida)
+				abrir_arquivo();
+				
+			fprintf(arquivoSaida,"1. %s", $2);
+		}
+		;
+		
+itensit:
+		| ITEM TEXTO itensit {
+			if(!arquivoSaida)
+				abrir_arquivo();
+				
+			fprintf(arquivoSaida,"* %s", $2);
+		}
+		;
+
+fimdoc:
+		FIMDOC ignorarlinha
+		;
 
 titulo:
 		TITULO DELIM titulotex DELIM pulalinha
@@ -65,7 +144,7 @@ titulotex:
 			if(!arquivoSaida)
 				abrir_arquivo();
 				
-			fprintf(arquivoSaida,"#%s", $1);
+			fprintf(arquivoSaida,"# %s", $1);
 		}
 		;
 
@@ -74,7 +153,25 @@ autortex:
 			if(!arquivoSaida)
 				abrir_arquivo();
 				
-			fprintf(arquivoSaida,"##%s", $1);
+			fprintf(arquivoSaida,"## %s", $1);
+		}
+		;
+		
+secaotex:
+		TEXTO {
+			if(!arquivoSaida)
+				abrir_arquivo();
+				
+			fprintf(arquivoSaida,"### %s", $1);
+		}
+		;
+
+subsecaotex:
+		TEXTO {
+			if(!arquivoSaida)
+				abrir_arquivo();
+				
+			fprintf(arquivoSaida,"#### %s", $1);
 		}
 		;
 		
