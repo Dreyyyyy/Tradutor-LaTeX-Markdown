@@ -43,7 +43,7 @@ classe:
 		;
 
 pacote:
-		PACOTE DELIM ignorartexto DELIM DELIM ignorartexto DELIM ignorarlinha {
+		| PACOTE DELIM ignorartexto DELIM ignorarlinha pacote| PACOTE DELIM ignorartexto DELIM DELIM ignorartexto DELIM ignorarlinha pacote {
 			printf("Pacotes ignorados.\n");
 		}
 		;
