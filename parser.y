@@ -20,6 +20,7 @@ void abrir_arquivo();
 %token TITULO
 %token DELIM
 %token AUTOR
+%token EOL
 
 %%
 
@@ -36,26 +37,38 @@ identificacao:
 		;
 
 titulo:
-		TITULO DELIM titulotex DELIM
+		TITULO DELIM titulotex DELIM pulalinha
 		;
 
 autor:
-		AUTOR DELIM autortex DELIM
+		AUTOR DELIM autortex DELIM pulalinha
 		;
 
 titulotex:
 		TEXTO {
-			abrir_arquivo();
-			fprintf(arquivoSaida,"#%s\n", $1);
+			if(!arquivoSaida)
+				abrir_arquivo();
+				
+			fprintf(arquivoSaida,"#%s", $1);
 		}
 		;
 
 autortex:
 		TEXTO {
-			fprintf(arquivoSaida,"##%s\n", $1);
+			if(!arquivoSaida)
+				abrir_arquivo();
+				
+			fprintf(arquivoSaida,"##%s", $1);
 		}
 		;
-
+		
+pulalinha:
+		| EOL pulalinha{
+			if(!arquivoSaida)
+				abrir_arquivo();	
+			fprintf(arquivoSaida,"\n");
+		}
+		;
 %%
 
 void abrir_arquivo() {
