@@ -65,7 +65,8 @@ autortex:
 pulalinha:
 		| EOL pulalinha{
 			if(!arquivoSaida)
-				abrir_arquivo();	
+				abrir_arquivo();
+				
 			fprintf(arquivoSaida,"\n");
 		}
 		;
