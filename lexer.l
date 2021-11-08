@@ -1,4 +1,4 @@
-%option noyywrap yylineno
+%]option noyywrap yylineno
 %{
 	#include <string.h>
 	#include <stdio.h>
