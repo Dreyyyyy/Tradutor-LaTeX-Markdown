@@ -7,7 +7,8 @@ int yylex();
 void yyerror( char *s);
 
 FILE *arquivoSaida = NULL;
-void abrir_arquivo();
+void abrir_arquivo(FILE **arquivo);
+void printa_arquivo(FILE *arquivo, char *texto);
 %}
 
 %union{
@@ -77,11 +78,11 @@ corpolista:
 		;		
 		
 secao:
-		SECAO DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"### "); } texto DELIM pulalinha
+		SECAO DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"### "); } texto DELIM pulalinha
 		;
 
 subsecao:
-		SUBSECAO DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"#### "); } texto DELIM pulalinha
+		SUBSECAO DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"#### "); } texto DELIM pulalinha
 		;
 		
 corpo:
@@ -89,8 +90,8 @@ corpo:
 		;
 
 estilo:
-		BOLD DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"**"); } texto { fprintf(arquivoSaida,"** "); } DELIM
-		| ITALIC DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"*"); } texto { fprintf(arquivoSaida,"* "); } DELIM
+		BOLD DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"**"); } texto { printa_arquivo(arquivoSaida,"** "); } DELIM
+		| ITALIC DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"*"); } texto { printa_arquivo(arquivoSaida,"* "); } DELIM
 		;
 
 listas :
@@ -108,18 +109,20 @@ listaitem:
 itensln:
 		| ITEM TEXTO itensln {
 			if(!arquivoSaida)
-				abrir_arquivo();
+				abrir_arquivo(&arquivoSaida);
 				
-			fprintf(arquivoSaida,"1. %s", $2);
+			printa_arquivo(arquivoSaida, "1. ");		
+			printa_arquivo(arquivoSaida, $2);
 		}
 		;
 		
 itensit:
 		| ITEM TEXTO itensit {
 			if(!arquivoSaida)
-				abrir_arquivo();
+				abrir_arquivo(&arquivoSaida);
 				
-			fprintf(arquivoSaida,"* %s", $2);
+			printa_arquivo(arquivoSaida, "* ");	
+			printa_arquivo(arquivoSaida, $2);
 		}
 		;
 
@@ -128,28 +131,28 @@ fimdoc:
 		;
 
 titulo:
-		TITULO DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"# "); } texto  DELIM pulalinha
+		TITULO DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"# "); } texto  DELIM pulalinha
 		;
 
 autor:
-		AUTOR DELIM { if(!arquivoSaida) abrir_arquivo(); fprintf(arquivoSaida,"## "); } texto DELIM pulalinha
+		AUTOR DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"## "); } texto DELIM pulalinha
 		;
 
 pulalinha:
 		| EOL pulalinha{
 			if(!arquivoSaida)
-				abrir_arquivo();	
+				abrir_arquivo(&arquivoSaida);	
 				
-			fprintf(arquivoSaida,"\n");
+			printa_arquivo(arquivoSaida,"\n");
 		}
 		;
 		
 texto:
 		TEXTO {
 			if(!arquivoSaida)
-				abrir_arquivo();
+				abrir_arquivo(&arquivoSaida);
 				
-			fprintf(arquivoSaida,"%s", $1);
+			printa_arquivo(arquivoSaida, $1);
 		}
 		;
 		
@@ -161,10 +164,3 @@ ignorarlinha:
 		| EOL ignorarlinha
 		;
 %%
-
-void abrir_arquivo() {
-	arquivoSaida = fopen("/home/andrey/Desktop/TRAB-01/arquivoSaida.md", "w");
-
-	if (!arquivoSaida)
-		printf(">Erro ao criar o arquivo!\n");
-}
