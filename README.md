@@ -1,4 +1,5 @@
 # Tradutor-LaTeX-Markdown
 
 1. Alterar diretório do arquivo de saída antes de compilar;
-3. Caracteres "{}[]\\" não passam pela analise léxica;
+2. Caracteres "{}[]\\" não passam pela analise léxica;
+3. Falta implementar o reconhecimento do token chapter;
