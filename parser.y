@@ -25,6 +25,7 @@ void printa_arquivo(FILE *arquivo, char *texto);
 %token EOL
 %token INICIODOC
 %token FIMDOC
+%token CAPITULO
 %token SECAO
 %token SUBSECAO
 %token INICIOLN
@@ -74,15 +75,19 @@ iniciodoc:
 		;
 		
 corpolista:
-		| secao corpo corpolista | subsecao corpo corpolista
+		| capitulo corpolista | secao corpo corpolista | subsecao corpo corpolista
 		;		
+				
+capitulo:
+		CAPITULO DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"### "); } texto DELIM pulalinha
+		;
 		
 secao:
-		SECAO DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"### "); } texto DELIM pulalinha
+		SECAO DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"#### "); } texto DELIM pulalinha
 		;
 
 subsecao:
-		SUBSECAO DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"#### "); } texto DELIM pulalinha
+		SUBSECAO DELIM { if(!arquivoSaida) abrir_arquivo(&arquivoSaida); printa_arquivo(arquivoSaida,"###### "); } texto DELIM pulalinha
 		;
 		
 corpo:
