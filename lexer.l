@@ -18,6 +18,7 @@ eol [\n]
 "\\author"								{ return AUTOR; }
 "\\begin{document}"				{	return INICIODOC; }
 "\\end{document}"					{ return FIMDOC; }
+"\\chapter"								{ return CAPITULO; }
 "\\section"								{ return SECAO; }
 "\\subsection"						{ return SUBSECAO; }
 "\\begin{enumerate}"			{ return INICIOLN; }
