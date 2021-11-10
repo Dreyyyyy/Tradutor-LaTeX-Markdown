@@ -1,4 +1,4 @@
-# Titl
+# Title
 ## Author
 
 ### LaTeX examples
