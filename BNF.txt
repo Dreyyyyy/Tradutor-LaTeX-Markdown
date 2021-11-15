@@ -1,0 +1,108 @@
+<programa> ::=
+      <documentoLatex> 
+      ;
+      
+<documentoLatex> ::=
+      <configuracao> <identificacao> <principal>
+		  ;
+      
+<configuracao> ::=
+      <classe> <pacote>
+      ;
+      
+<classe> ::=
+      CLASSE DELIM <ignorartexto> DELIM <ignorarlinha>
+      ;
+      
+<pacote> ::=
+      | PACOTE DELIM <ignorartexto> DELIM <ignorarlinha> <pacote>
+      | PACOTE DELIM <ignorartexto> DELIM DELIM <ignorartexto> DELIM <ignorarlinha> <pacote>
+      ;
+
+<identificacao> ::=
+		  <titulo> <autor>
+		  ;
+    
+<principal> ::=
+		<iniciodoc> <corpolista> <fimdoc>
+		  ;
+		
+<iniciodoc> ::=
+		  INICIODOC <ignorarlinha>
+		  ;
+		
+<corpolista> ::=
+		  | <capitulo> <corpolista> 
+      | <secao> <corpo> <corpolista> 
+      | <subsecao> <corpo> <corpolista>
+		  ;
+      
+<capitulo> ::=
+      CAPITULO DELIM <texto> DELIM <pulalinha>
+      ;
+		
+<secao> ::=
+      SECAO DELIM <texto> DELIM <pulalinha>
+      ;
+
+<subsecao> ::=
+      SUBSECAO DELIM <texto> DELIM <pulalinha>
+      ;
+		
+<corpo> ::=
+      <texto> <estilo> <corpo> | <texto> | <listas> | <estilo>
+      ;
+
+<estilo> ::=
+      BOLD DELIM <texto> DELIM
+      | ITALIC DELIM <texto> DELIM
+      ;
+
+<listas> ::=
+      | <listanum> <listas> 
+      | <listaitem> <listas>
+      ;
+		
+<listanum> ::=
+      INICIOLN <ignorarlinha> <itensln> FIMLN <ignorarlinha>
+      ;
+		
+<listaitem> ::=
+      INICIOIT <ignorarlinha> <itensit> FIMIT <ignorarlinha>
+      ;
+		
+<itensln> ::=
+      | ITEM TEXTO <itensln>
+      ;
+		
+<itensit> ::=
+      | ITEM TEXTO <itensit> {
+      ;
+
+<fimdoc> ::=
+      FIMDOC <ignorarlinha>
+      ;
+
+<titulo> ::=
+      TITULO DELIM <texto> DELIM <pulalinha>
+      ;
+
+<autor> ::=
+      AUTOR DELIM <texto> DELIM <pulalinha>
+      ;
+
+<pulalinha> ::=
+      | EOL <pulalinha>
+      ;
+		
+<texto> ::=
+      TEXTO
+      ;
+		
+<ignorartexto> ::=
+      TEXTO
+      ;
+		
+<ignorarlinha> ::=
+		  | EOL <ignorarlinha>
+		  ;
