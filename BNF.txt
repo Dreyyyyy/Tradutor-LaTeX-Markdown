@@ -50,8 +50,8 @@
       ;
 		
 <corpo> ::=
-      <texto> <estilo> <corpo> | <texto> <listas> <corpo> | <listas> <texto> <corpo> | <texto> | <listas> | <estilo>
-      ;
+		| <texto> <corpo> | <listas> <corpo> | <estilo> <corpo>
+		;
 
 <estilo> ::=
       BOLD DELIM <texto> DELIM
@@ -59,7 +59,7 @@
       ;
 
 <listas> ::=
-      | <listanum> <listas> 
+      <listanum> <listas> 
       | <listaitem> <listas>
       ;
 		
