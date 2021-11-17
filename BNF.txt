@@ -50,7 +50,7 @@
       ;
 		
 <corpo> ::=
-      <texto> <estilo> <corpo> | <texto> | <listas> | <estilo>
+      <texto> <estilo> <corpo> | <texto> <listas> <corpo> | <listas> <texto> <corpo> | estilo<texto> | <listas> | <estilo>
       ;
 
 <estilo> ::=
