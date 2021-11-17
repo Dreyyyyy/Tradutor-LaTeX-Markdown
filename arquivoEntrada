@@ -8,14 +8,58 @@
 
 \usepackage{amsmath}
 
-\title{Title}
-\author{Author}
+\title{Testando 123}
+\author{Roberto Vieira}
 
 \begin{document}
 
 \chapter{LaTeX examples}
 
+List start here:
+
+\begin{enumerate}
+\item Like this,
+\item and like this,
+\item one more item...
+\item and another one.
+\end{enumerate}
+
+\begin{itemize}
+\item Like this,
+\item and like this,
+\item one more item...
+\item and another one.
+\end{itemize}
+
+\begin{enumerate}
+\item Like this,
+\item and like this,
+\item one more item...
+\item and another one.
+\end{enumerate}
+
+\begin{itemize}
+\item Like this,
+\item and like this,
+\item one more item...
+\item and another one.
+\end{itemize}
+
 \section{Some examples to get started}
+
+\begin{enumerate}
+\item Like this,
+\item and like this,
+\item one more item...
+\item and another one.
+\end{enumerate}
+
+\begin{itemize}
+\item Like this,
+\item and like this,
+\item one more item...
+\item and another one.
+\end{itemize}
 
 \subsection{How to create Sections and Subsections}
 
@@ -40,5 +84,29 @@ We hope you find Overleaf useful, and do take a look at our https://www.overleaf
 \item one more item...
 \item and another one.
 \end{itemize}
+
+\chapter{Just a test}
+
+\section{Another test}
+
+Just testing.
+
+\begin{enumerate}
+\item Like this,
+\item and like this,
+\item one more item...
+\item and another one.
+\end{enumerate}
+
+\subsection{#3 test}
+
+\begin{enumerate}
+\item Like this,
+\item and like this,
+\item one more item...
+\item and another one.
+\end{enumerate}
+
+Just testing.
 
 \end{document}

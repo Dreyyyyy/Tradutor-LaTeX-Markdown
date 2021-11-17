@@ -75,7 +75,7 @@ iniciodoc:
 		;
 		
 corpolista:
-		| capitulo corpolista | secao corpo corpolista | subsecao corpo corpolista
+		| capitulo corpo corpolista | secao corpo corpolista | subsecao corpo corpolista
 		;		
 				
 capitulo:
@@ -91,7 +91,7 @@ subsecao:
 		;
 		
 corpo:
-		texto estilo corpo | texto | listas | estilo
+		| texto estilo corpo | texto listas corpo | listas texto corpo | listas | estilo
 		;
 
 estilo:
@@ -104,15 +104,23 @@ listas :
 		;
 		
 listanum:
-		INICIOLN ignorarlinha itensln FIMLN ignorarlinha
+		INICIOLN ignorarlinha itensl FIMLN pulalinha
 		;
 		
 listaitem:
-		INICIOIT ignorarlinha itensit FIMIT ignorarlinha
+		INICIOIT ignorarlinha itensi FIMIT pulalinha
+		;
+		
+itensl:
+		| itensln itensl
+		;		
+		
+itensi:
+		| itensit itensi
 		;
 		
 itensln:
-		| ITEM TEXTO itensln {
+		ITEM TEXTO {
 			if(!arquivoSaida)
 				abrir_arquivo(&arquivoSaida);
 				
@@ -122,7 +130,7 @@ itensln:
 		;
 		
 itensit:
-		| ITEM TEXTO itensit {
+		ITEM TEXTO {
 			if(!arquivoSaida)
 				abrir_arquivo(&arquivoSaida);
 				
