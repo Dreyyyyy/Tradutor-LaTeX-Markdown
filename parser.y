@@ -91,7 +91,7 @@ subsecao:
 		;
 		
 corpo:
-		| texto estilo corpo | texto listas corpo | listas texto corpo | listas | estilo
+		| texto corpo | listas corpo | estilo corpo
 		;
 
 estilo:
@@ -100,7 +100,7 @@ estilo:
 		;
 
 listas :
-		| listanum listas | listaitem listas
+		listanum | listaitem
 		;
 		
 listanum:

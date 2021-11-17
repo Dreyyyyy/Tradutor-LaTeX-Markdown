@@ -15,7 +15,7 @@ void yyerror(char *s) {
 }
 
 void abrir_arquivo(FILE **arquivo) {
-	*arquivo = fopen("/home/andrey/Desktop/TRAB-01/arquivoSaida.md", "w");
+	*arquivo = fopen("/home/andrey/Desktop/Tradutor-LaTeX-Markdown-2.0/arquivoSaida.md", "w");
 
 	if (!(*arquivo))
 		printf(">Erro ao criar o arquivo!\n");
