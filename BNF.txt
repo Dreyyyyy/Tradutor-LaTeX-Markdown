@@ -59,8 +59,8 @@
       ;
 
 <listas> ::=
-      <listanum> <listas> 
-      | <listaitem> <listas>
+      <listanum> 
+      | <listaitem>
       ;
 		
 <listanum> ::=
