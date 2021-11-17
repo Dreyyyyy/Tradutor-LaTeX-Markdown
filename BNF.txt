@@ -64,20 +64,20 @@
       ;
 		
 <listanum> ::=
-      INICIOLN <ignorarlinha> <itensln> FIMLN <ignorarlinha>
-      ;
+		INICIOLN <ignorarlinha> <itensl> FIMLN <pulalinha>
+		;
 		
 <listaitem> ::=
-      INICIOIT <ignorarlinha> <itensit> FIMIT <ignorarlinha>
-      ;
+		INICIOIT <ignorarlinha> <itensi> FIMIT <pulalinha>
+		;
 		
-<itensln> ::=
-      | ITEM TEXTO <itensln>
-      ;
+<itensl> ::=
+		| <itensln> <itensl>
+		;		
 		
-<itensit> ::=
-      | ITEM TEXTO <itensit> {
-      ;
+<itensi> ::=
+		| <itensit> <itensi>
+		;
 
 <fimdoc> ::=
       FIMDOC <ignorarlinha>
