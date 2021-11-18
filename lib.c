@@ -1,4 +1,4 @@
-//Calculadora :: definição de funções em C
+//Tradutor LaTeX para Markdown :: definição de funções em C
 
 #include <stdio.h>
 #include <string.h>
